@@ -31,8 +31,7 @@ class UserModal extends React.Component {
     handleChange(e) {
         const {name, value} = e.target;
         const user = this.state.user;
-        user[name] = value;
-        this.setState({ user: user });
+        this.setState({ user:{...user, [name]: value}});
     }
 
     handleSubmit(e) {
