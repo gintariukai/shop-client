@@ -72,10 +72,10 @@ class App extends React.Component{
                 <div>
                     {this.state.currentUser &&
                         <nav className="navbar navbar-expand navbar-dark bg-dark">
-                            <a className="navbar-brand" href="https://reactjs.org">
+                            <Link className="navbar-brand" href="https://reactjs.org">
                                 <img src={logo} className="App-logo" alt="logo"/>
                                 React
-                            </a>
+                            </Link>
                             <div className="navbar-nav mr-auto">
                                 <Link to="/home" className={currentLocation === '/home' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faHome}/> Home</Link>
                                 {this.state.isAdmin && <Link to="/admin" className={currentLocation == '/admin' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserShield}/> Admin</Link>}
@@ -90,10 +90,10 @@ class App extends React.Component{
 
                     {!this.state.currentUser &&
                         <nav className="navbar navbar-expand navbar-dark bg-dark">
-                            <a className="navbar-brand" href="https://reactjs.org">
+                            <Link className="navbar-brand" href="https://reactjs.org">
                                 <img src={logo} className="App-logo" alt="logo"/>
                                 React
-                            </a>
+                            </Link>
                             <div className="navbar-nav mr-auto">
                                 <Link to="/home" className={currentLocation === '/home' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faHome}/> Home</Link>
                             </div>
