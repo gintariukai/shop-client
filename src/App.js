@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Router, Route, Link, Switch, Redirect, NavLink, BrowserRouter} from 'react-router-dom';
+import {Router, Route, Link, BrowserRouter, RouterProvider, Routes} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 
 import {HomePage} from './components/home/HomePage';
@@ -28,11 +28,10 @@ class App extends React.Component{
             history: createBrowserHistory(),
             currentUser: null,
             isAdmin: false,
-            currentLocation: window.location.pathname
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.unlisten = this.state.history.listen((location, action) => {
             this.setState({currentLocation: location.pathname})
         });
@@ -40,6 +39,7 @@ class App extends React.Component{
 
     componentWillUnmount() {
         this.unlisten();
+        clearInterval(this.setState)
     }
 
     componentDidMount() {
@@ -68,17 +68,17 @@ class App extends React.Component{
     render(){
         const {currentUser, isAdmin, history, currentLocation} = this.state;
         return (
-            <Router history={history}>
+            <BrowserRouter history={history}>
                 <div>
                     {this.state.currentUser &&
                         <nav className="navbar navbar-expand navbar-dark bg-dark">
-                            <Link className="navbar-brand" href="https://reactjs.org">
+                            <a className="navbar-brand" href="https://reactjs.org">
                                 <img src={logo} className="App-logo" alt="logo"/>
                                 React
-                            </Link>
+                            </a>
                             <div className="navbar-nav mr-auto">
                                 <Link to="/home" className={currentLocation === '/home' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faHome}/> Home</Link>
-                                {this.state.isAdmin && <Link to="/admin" className={currentLocation == '/admin' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserShield}/> Admin</Link>}
+                                {this.state.isAdmin && <Link to="/admin" className={currentLocation === '/admin' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserShield}/> Admin</Link>}
                             </div>
 
                             <div className="navbar-nav ml-auto">
@@ -90,10 +90,10 @@ class App extends React.Component{
 
                     {!this.state.currentUser &&
                         <nav className="navbar navbar-expand navbar-dark bg-dark">
-                            <Link className="navbar-brand" href="https://reactjs.org">
+                            <a className="navbar-brand" href="https://reactjs.org">
                                 <img src={logo} className="App-logo" alt="logo"/>
                                 React
-                            </Link>
+                            </a>
                             <div className="navbar-nav mr-auto">
                                 <Link to="/home" className={currentLocation === '/home' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faHome}/> Home</Link>
                             </div>
@@ -105,21 +105,21 @@ class App extends React.Component{
                         </nav>
                     }
                     <div className="container">
-                        <BrowserRouter>
+                        <Routes>
                             <Route exact path="/" component={HomePage}/>
                             <Route exact path="/home" component={HomePage}/>
                             <Route exact path="/login" component={LoginPage}/>
                             <Route exact path="/register" component={RegisterPage}/>
-                            <AuthGuard path="/profile" roles={[Role.ADMIN, Role.USER]} component={ProfilePage}/>
+                            {/*<AuthGuard path="/profile" roles={[Role.ADMIN, Role.USER]} component={ProfilePage}/>*/}
                             <Route exact path="/detail/:id" component={DetailPage}/>
-                            <AuthGuard path="/admin" roles={[Role.ADMIN]} component={AdminPage}/>
+                            {/*<AuthGuard path="/admin" roles={[Role.ADMIN]} component={AdminPage}/>*/}
                             <Route exact path="/404" component={NotFound}/>
                             <Route exact path="/401" component={Unauthorized}/>
                             <Route from='*' to='/404' />
-                        </BrowserRouter>
+                        </Routes>
                     </div>
                 </div>
-            </Router>
+            </BrowserRouter>
         );
     }
 }
