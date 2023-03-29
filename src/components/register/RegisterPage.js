@@ -20,8 +20,8 @@ class RegisterPage extends React.Component {
     }
 
     handleChange(e) {
-        var {name, value} = e.target;
-        var user = this.state.user;
+        const {name, value} = e.target;
+        const user = this.state.user;
         user[name] = value;
         this.setState({user: user});
     }
@@ -62,7 +62,7 @@ class RegisterPage extends React.Component {
         return (
             <div className="col-md-12">
                 <div className="card card-container">
-                    <img id="profile-id" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
+                    <img id="profile-id" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="avatar"/>
                     {errorMessage &&
                         <div className="alert alert-danger" role="alert">
                             <strong>Error! </strong> {errorMessage}

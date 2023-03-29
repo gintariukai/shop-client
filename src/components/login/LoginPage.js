@@ -22,8 +22,8 @@ class LoginPage extends React.Component {
     }
 
     handleChange(e){
-        var { name, value } = e.target;
-        var user = this.state.user;
+        const {name, value} = e.target;
+        const user = this.state.user;
         user[name] = value;
         this.setState({ user: user });
     }
