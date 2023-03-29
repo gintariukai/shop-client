@@ -33,7 +33,7 @@ class AdminPage extends React.Component {
         });
         AdminService.findAllUsers()
             .then(users => {
-                console.log(users);
+                // console.log(users);
                 this.setState({ users: users.data });
             });
     }
@@ -46,7 +46,7 @@ class AdminPage extends React.Component {
     }
 
     editUserRequest(user) {
-        console.log(user);
+        // console.log(user);
         this.setState({ selectedUser: user });
         this.setState({
             showModal: true
@@ -78,8 +78,8 @@ class AdminPage extends React.Component {
         if(!isSucceed){
             return;
         }
-        var userList = this.state.users;
-        let itemIndex = userList.findIndex(item => item.id == user.id);
+        const userList = this.state.users;
+        let itemIndex = userList.findIndex(item => item.id === user.id);
         if(itemIndex !== -1){
             userList.splice(itemIndex, 1);
             this.setState({
@@ -111,7 +111,7 @@ class AdminPage extends React.Component {
     }
 
     createUser(user){
-        var users = this.state.users;
+        const users = this.state.users;
         users.push(user);
         this.setState({
             users: users
@@ -119,7 +119,7 @@ class AdminPage extends React.Component {
     }
 
     updateUser(user){
-        var userList = this.state.users;
+        const userList = this.state.users;
         let itemIndex = userList.findIndex(item => item.id == user.id);
         userList[itemIndex] = user;
     }
