@@ -23,9 +23,11 @@ import {
     faUserPlus,
     faSignInAlt,
     faHome,
+    faAddressBook,
     faSignOutAlt,
     faUserShield,
 } from '@fortawesome/free-solid-svg-icons';
+import ContactPage from "./components/contact/ContactPage";
 
 class App extends React.Component {
     state = {
@@ -75,7 +77,7 @@ class App extends React.Component {
                         <nav className="navbar navbar-expand navbar-dark bg-dark">
                             <a className="navbar-brand" href="https://reactjs.org">
                                 <img src={logo} className="App-logo" alt="logo"/>
-                                React
+                                Nomeda Hair Boutique
                             </a>
                             <div className="navbar-nav mr-auto">
                                 <Link to="/home" className={currentLocation === '/home' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faHome}/> Home</Link>
@@ -100,8 +102,9 @@ class App extends React.Component {
                             </div>
 
                             <div className="navbar-nav ml-auto">
-                                <Link to="/register" className={currentLocation === '/register' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserPlus}/> Register</Link>
+                                <Link to="/register" className={currentLocation === '/register' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserPlus}/> Sign Up</Link>
                                 <Link to="/login" className={currentLocation === '/login' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faSignInAlt}/> Login</Link>
+                                <Link to="/contact" className={currentLocation === '/contact' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faAddressBook}/> Contact</Link>
                             </div>
                         </nav>
                     }
@@ -111,6 +114,7 @@ class App extends React.Component {
                             <Route exact path="/home" element={<HomePage />} />
                             <Route exact path="/login" element={<LoginPage />} />
                             <Route exact path="/register" element={<RegisterPage />} />
+                            <Route exact path="/contact" element={<ContactPage />} />
                             <Route
                                 exact
                                 path="/profile"

@@ -1,9 +1,9 @@
-label{
+label {
     display: block;
     margin-top: 10px;
 }
 
-.btn-link{
+.btn-link {
     display: block;
     width: 100%;
     text-align: center;
@@ -81,7 +81,8 @@ label{
     /*background-color: #4d90fe; */
     background-color: rgb(104, 145, 162);
     /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
-    padding: 0px;
+    padding: 5px;
+    margin-top: 10px;
     font-weight: 700;
     font-size: 14px;
     height: 36px;
@@ -99,5 +100,5 @@ label{
 .btn.btn-signin:hover,
 .btn.btn-signin:active,
 .btn.btn-signin:focus {
-    background-color: rgb(12, 97, 33);
+    background-color: rgb(19, 154, 222);
 }
