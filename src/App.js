@@ -1,65 +1,66 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Router, Route, Link, BrowserRouter, RouterProvider, Routes} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
+import {BrowserRouter, Link, Navigate, Route, Routes} from "react-router-dom";
 
-import {HomePage} from './components/home/HomePage';
-import {LoginPage} from './components/login/LoginPage';
-import {RegisterPage} from './components/register/RegisterPage';
-import {ProfilePage} from './components/profile/ProfilePage';
-import {DetailPage} from './components/detail/DetailPage';
-import {AdminPage} from './components/admin/AdminPage';
-import {NotFound} from './components/errors/NotFound';
-import {Unauthorized} from './components/errors/Unauthorized';
+import { HomePage } from './components/home/HomePage';
+import { LoginPage } from './components/login/LoginPage';
+import { RegisterPage } from './components/register/RegisterPage';
+import { ProfilePage } from './components/profile/ProfilePage';
+import { DetailPage } from './components/detail/DetailPage';
+import { AdminPage } from './components/admin/AdminPage';
+import { NotFound } from './components/errors/NotFound';
+import { Unauthorized } from './components/errors/Unauthorized';
 
 import AuthGuard from './guards/AuthGuard';
-import {Role} from './models/role';
+import { Role } from './models/role';
 
 import UserService from './services/user.service';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faUser, faUserPlus, faSignInAlt, faHome, faSignOutAlt, faUserShield} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faUser,
+    faUserPlus,
+    faSignInAlt,
+    faHome,
+    faSignOutAlt,
+    faUserShield,
+} from '@fortawesome/free-solid-svg-icons';
 
-class App extends React.Component{
-    constructor(props){
-        super(props);
+class App extends React.Component {
+    state = {
+        history: createBrowserHistory(),
+        currentUser: null,
+        isAdmin: false,
+        errorMessage: null,
+        currentLocation: '',
+    };
 
-        this.state = {
-            history: createBrowserHistory(),
-            currentUser: null,
-            isAdmin: false,
-        };
-    }
-
-    componentWillMount() {
+    componentDidMount() {
         this.unlisten = this.state.history.listen((location, action) => {
-            this.setState({currentLocation: location.pathname})
+            this.setState({ currentLocation: location.pathname });
+        });
+
+        UserService.currentUser.subscribe((data) => {
+            this.setState({
+                currentUser: data,
+                isAdmin: data && data.role === Role.ADMIN,
+            });
         });
     }
 
     componentWillUnmount() {
         this.unlisten();
-        clearInterval(this.setState)
-    }
-
-    componentDidMount() {
-        UserService.currentUser.subscribe(data => {
-            this.setState({
-                currentUser: data,
-                isAdmin: data && data.role === Role.ADMIN
-            })
-        });
     }
 
     logout() {
-        UserService.logOut()
-            .then(
-                data => {
-                    this.state.history.push('/home');
-                },
-                error => {
-                    this.setState({
-                        errorMessage: "Unexpected error occurred"
+        UserService.logOut().then(
+            (data) => {
+                this.state.history.push('/home');
+            },
+            (error) => {
+                this.setState({
+                    errorMessage: "Unexpected error occurred"
                     });
                 }
             );
@@ -106,18 +107,28 @@ class App extends React.Component{
                     }
                     <div className="container">
                         <Routes>
-                            <Route exact path="/" component={HomePage}/>
-                            <Route exact path="/home" component={HomePage}/>
-                            <Route exact path="/login" component={LoginPage}/>
-                            <Route exact path="/register" component={RegisterPage}/>
-                            {/*<AuthGuard path="/profile" roles={[Role.ADMIN, Role.USER]} component={ProfilePage}/>*/}
-                            <Route exact path="/detail/:id" component={DetailPage}/>
-                            {/*<AuthGuard path="/admin" roles={[Role.ADMIN]} component={AdminPage}/>*/}
-                            <Route exact path="/404" component={NotFound}/>
-                            <Route exact path="/401" component={Unauthorized}/>
-                            <Route from='*' to='/404' />
+                            <Route exact path="/" element={<HomePage />} />
+                            <Route exact path="/home" element={<HomePage />} />
+                            <Route exact path="/login" element={<LoginPage />} />
+                            <Route exact path="/register" element={<RegisterPage />} />
+                            <Route
+                                exact
+                                path="/profile"
+                                element={<AuthGuard roles={[Role.ADMIN, Role.USER]} component={<ProfilePage />} />}
+                            />
+                            <Route exact path="/detail/:id" element={<DetailPage />} />
+                            <Route
+                                exact
+                                path="/admin"
+                                element={<AuthGuard roles={[Role.ADMIN]} component={<AdminPage />} />}
+                            />
+                            <Route exact path="/404" element={<NotFound />} />
+                            <Route exact path="/401" element={<Unauthorized />} />
+                            <Route path="*" element={<Navigate to="/404" />} />
                         </Routes>
                     </div>
+
+
                 </div>
             </BrowserRouter>
         );
