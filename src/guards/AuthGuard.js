@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Redirect} from 'react-router-dom';
+import {Route, Redirect, Link} from 'react-router-dom';
 import UserService from '../services/user.service';
 
 class AuthGuard extends React.Component{
@@ -12,11 +12,11 @@ class AuthGuard extends React.Component{
         const {component: Component, roles} = this.props;
         const currentUser = UserService.currentUserValue;
         if(!currentUser){
-            return (<Redirect to={{pathname: '/login'}}/>);
+            return (<Link to={{pathname: '/login'}}/>);
         }
 
         if(roles && roles.indexOf(currentUser.role) === -1){
-            return (<Redirect to={{pathname: '/401'}}/>);
+            return (<Link to={{pathname: '/401'}}/>);
         }
 
         return (<Component/>);
