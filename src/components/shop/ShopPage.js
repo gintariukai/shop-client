@@ -4,7 +4,7 @@ import {User} from '../../models/user';
 import {Transaction} from '../../models/transaction';
 import CarouselBox from "../../components/carousel/CarouselBox";
 
-class HomePage extends React.Component {
+class ShopPage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -115,4 +115,4 @@ class HomePage extends React.Component {
 
 }
 
-export {HomePage};
+export {ShopPage};

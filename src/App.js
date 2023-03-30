@@ -5,6 +5,7 @@ import {createBrowserHistory} from 'history';
 import {BrowserRouter, Link, Navigate, Route, Routes} from "react-router-dom";
 
 import { HomePage } from './components/home/HomePage';
+import { ShopPage } from './components/shop/ShopPage';
 import { LoginPage } from './components/login/LoginPage';
 import { RegisterPage } from './components/register/RegisterPage';
 import { ProfilePage } from './components/profile/ProfilePage';
@@ -75,12 +76,12 @@ class App extends React.Component {
                 <div>
                     {this.state.currentUser &&
                         <nav className="navbar navbar-expand navbar-dark bg-dark">
-                            <a className="navbar-brand" href="https://reactjs.org">
+                            <a className="navbar-brand" href="https://www.facebook.com/NomedaHairBoutique">
                                 <img src={logo} className="App-logo" alt="logo"/>
                                 Nomeda Hair Boutique
                             </a>
                             <div className="navbar-nav mr-auto">
-                                <Link to="/home" className={currentLocation === '/home' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faHome}/> Home</Link>
+                                <Link to="/shop" className={currentLocation === '/shop' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faHome}/> Shop</Link>
                                 {this.state.isAdmin && <Link to="/admin" className={currentLocation === '/admin' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserShield}/> Admin</Link>}
                             </div>
 
@@ -93,15 +94,16 @@ class App extends React.Component {
 
                     {!this.state.currentUser &&
                         <nav className="navbar navbar-expand navbar-dark bg-dark">
-                            <a className="navbar-brand" href="https://reactjs.org">
+                            <a className="navbar-brand" href="https://www.facebook.com/NomedaHairBoutique">
                                 <img src={logo} className="App-logo" alt="logo"/>
-                                React
+                                Nomeda Hair Boutique
                             </a>
                             <div className="navbar-nav mr-auto">
                                 <Link to="/home" className={currentLocation === '/home' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faHome}/> Home</Link>
                             </div>
 
                             <div className="navbar-nav ml-auto">
+                                <Link to="/register" className={currentLocation === '/register' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserPlus}/> Sign Up</Link>
                                 <Link to="/register" className={currentLocation === '/register' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserPlus}/> Sign Up</Link>
                                 <Link to="/login" className={currentLocation === '/login' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faSignInAlt}/> Login</Link>
                                 <Link to="/contact" className={currentLocation === '/contact' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faAddressBook}/> Contact</Link>
@@ -112,6 +114,7 @@ class App extends React.Component {
                         <Routes>
                             <Route exact path="/" element={<HomePage />} />
                             <Route exact path="/home" element={<HomePage />} />
+                            <Route exact path="/shop" element={<ShopPage />} />
                             <Route exact path="/login" element={<LoginPage />} />
                             <Route exact path="/register" element={<RegisterPage />} />
                             <Route exact path="/contact" element={<ContactPage />} />
