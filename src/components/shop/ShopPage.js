@@ -2,7 +2,6 @@ import React from 'react';
 import UserService from '../../services/user.service';
 import {User} from '../../models/user';
 import {Transaction} from '../../models/transaction';
-import CarouselBox from "../../components/carousel/CarouselBox";
 
 class ShopPage extends React.Component {
 
@@ -57,7 +56,7 @@ class ShopPage extends React.Component {
         const {products, infoMessage, errorMessage} = this.state;
         return (
             <>
-                <CarouselBox />
+                {/*<CarouselBox />*/}
                 <div className="col-md-12">
                     {infoMessage &&
                         <div className="alert alert-success">

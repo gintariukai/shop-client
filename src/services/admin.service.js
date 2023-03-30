@@ -16,15 +16,15 @@ class AdminService {
     }
 
     updateUser(user) {
-        return axios.put(API_URL + "user-update", JSON.stringify(user), {headers: this.headers});
+        return axios.put(API_URL + "/user-update", JSON.stringify(user), {headers: this.headers});
     }
 
     deleteUser(user) {
-        return axios.post(API_URL + "user-delete", JSON.stringify(user), {headers:this.headers});
+        return axios.post(API_URL + "/user-delete", JSON.stringify(user), {headers:this.headers});
     }
 
     findAllUsers(){
-        return axios.get(API_URL + "user-all", {headers: this.headers});
+        return axios.get(API_URL + "/user-all", {headers: this.headers});
     }
 }
 

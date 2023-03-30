@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Redirect, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import UserService from '../services/user.service';
 
 class AuthGuard extends React.Component{

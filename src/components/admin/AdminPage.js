@@ -120,7 +120,7 @@ class AdminPage extends React.Component {
 
     updateUser(user){
         const userList = this.state.users;
-        let itemIndex = userList.findIndex(item => item.id == user.id);
+        let itemIndex = userList.findIndex(item => item.id === user.id);
         userList[itemIndex] = user;
     }
 
