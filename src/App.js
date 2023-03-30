@@ -104,7 +104,7 @@ class App extends React.Component {
 
                             <div className="navbar-nav ml-auto">
                                 <Link to="/register" className={currentLocation === '/register' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserPlus}/> Sign Up</Link>
-                                <Link to="/register" className={currentLocation === '/register' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faUserPlus}/> Sign Up</Link>
+                                <Link to="/shop" className={currentLocation === '/shop' ? 'nav-item nav-link active': 'nav-item nav-link'}> Shop</Link>
                                 <Link to="/login" className={currentLocation === '/login' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faSignInAlt}/> Login</Link>
                                 <Link to="/contact" className={currentLocation === '/contact' ? 'nav-item nav-link active': 'nav-item nav-link'}><FontAwesomeIcon icon={faAddressBook}/> Contact</Link>
                             </div>
