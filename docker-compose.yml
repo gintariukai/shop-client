@@ -19,8 +19,8 @@ services:
       # Opens port 3306 on the container
       - '3306'
 
-  dbproduct:
-    container_name: dbproduct
+  shop_app:
+    container_name: shop_app
     depends_on:
       - dbproduct
     build:
@@ -37,4 +37,3 @@ services:
       # Opens port 8080 on the container
       - '8080'
       - '5005'
-
